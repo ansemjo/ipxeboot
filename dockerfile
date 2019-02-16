@@ -9,15 +9,13 @@ RUN apk add --no-cache git gcc make musl-dev openssl perl xz-dev
 # clone source code
 RUN git clone --depth 1 git://git.ipxe.org/ipxe.git /ipxe
 
-# prepare build
-ARG MAKEFLAGS=-j$(nproc)
+# prepare build and apply configuration tweaks
 WORKDIR /ipxe/src
-
-# apply configuration tweaks
+ARG MAKEFLAGS=
 COPY config/* ./config/local/
+COPY userclass.ipxe ./
 
 # build bios and efi targets with embedded user-class script
-COPY userclass.ipxe ./
 RUN make EMBED=userclass.ipxe \
   bin-i386-pcbios/undionly.kpxe \
   bin-x86_64-efi/ipxe.efi

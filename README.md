@@ -46,10 +46,6 @@ You can compile the iPXE binaries and build the container image yourself, of cou
 
     docker build -t ipxeboot .
 
-By default, `make` uses all available cores. On machines with little RAM this can lead to
-out-of-memory errors. Use `--build-arg MAKEFLAGS=-j1` to limit `make` to one core and thereby reduce
-memory load.
-
 ### Configure iPXE
 
 The files in [config](config/) are copied into the iPXE source tree under `src/config/local/` before
