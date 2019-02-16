@@ -14,11 +14,11 @@ ARG MAKEFLAGS=-j$(nproc)
 WORKDIR /ipxe/src
 
 # apply configuration tweaks
-COPY configure.sh .
-RUN ash configure.sh $PWD
+COPY config/* ./config/local/
 
-# build bios and efi targets
-RUN make \
+# build bios and efi targets with embedded user-class script
+COPY userclass.ipxe ./
+RUN make EMBED=userclass.ipxe \
   bin-i386-pcbios/undionly.kpxe \
   bin-x86_64-efi/ipxe.efi
 
@@ -39,15 +39,15 @@ COPY --from=ipxe \
 
 # prepare default run command
 ENV SUBNET=192.168.1.1
-ENV MENU=http://example.local/menu.ipxe
+ENV CHAIN=unconfigured
 
 CMD exec dnsmasq -d -q --port 0 \
   --enable-tftp --tftp-root=/tftp \
   --dhcp-range="${SUBNET},proxy" \
-  --dhcp-userclass="set:ipxe,iPXE" \
+  --dhcp-userclass="set:ipxe,ipxechain" \
   --pxe-service="tag:#ipxe,x86PC,'chainload bios --> ipxe',undionly.kpxe" \
-  --pxe-service="tag:ipxe,x86PC,'load menu',${MENU}" \
+  --pxe-service="tag:ipxe,x86PC,'load menu',${CHAIN}" \
   --pxe-service="tag:#ipxe,BC_EFI,'chainload bc_efi --> ipxe',ipxe.efi" \
-  --pxe-service="tag:ipxe,BC_EFI,'load menu',${MENU}" \
+  --pxe-service="tag:ipxe,BC_EFI,'load menu',${CHAIN}" \
   --pxe-service="tag:#ipxe,x86-64_EFI,'chainload efi --> ipxe',ipxe.efi" \
-  --pxe-service="tag:ipxe,x86-64_EFI,'load menu',${MENU}"
+  --pxe-service="tag:ipxe,x86-64_EFI,'load menu',${CHAIN}"
