@@ -52,3 +52,12 @@ The files in [config](config/) are copied into the iPXE source tree under `src/c
 compilation. They enable certain features, tweak the branding and change the color scheme ...
 
 See http://ipxe.org/buildcfg for a list of useful build options.
+
+## Licensing
+
+This project is licensed under the GNU General Public License 3 or any later version at your own
+discretion.
+
+The container image is [distributed](https://hub.docker.com/r/ansemjo/ipxeboot) with 
+[iPXE](http://ipxe.org/) and [dnsmasq](http://www.thekelleys.org.uk/dnsmasq/) binaries, both of which
+are licensed under "GPL-2.0 or later" terms.

@@ -1,5 +1,8 @@
 #!ipxe
 
+# Copyright (c) 2019 Anton Semjonov
+# Licensed under the GPL-3.0 License or later versions at your discretion
+
 # http://ipxe.org/appnote/userclass
 # Change the user-class to force loading of this particular iPXE binary.
 

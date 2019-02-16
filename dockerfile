@@ -1,3 +1,6 @@
+# Copyright (c) 2019 Anton Semjonov
+# Licensed under the GPL-3.0 License or later versions at your discretion
+
 # ---------- compile ipxe binaries ----------
 
 # alpine base image
