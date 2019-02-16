@@ -44,10 +44,10 @@ ENV CHAIN=unconfigured
 CMD exec dnsmasq -d -q --port 0 \
   --enable-tftp --tftp-root=/tftp \
   --dhcp-range="${SUBNET},proxy" \
-  --dhcp-userclass="set:ipxe,ipxechain" \
-  --pxe-service="tag:#ipxe,x86PC,'chainload bios --> ipxe',undionly.kpxe" \
+  --dhcp-userclass="set:ipxe,ipxeboot" \
+  --pxe-service="tag:#ipxe,x86PC,'load ipxeboot (bios)',undionly.kpxe" \
   --pxe-service="tag:ipxe,x86PC,'load menu',${CHAIN}" \
-  --pxe-service="tag:#ipxe,BC_EFI,'chainload bc_efi --> ipxe',ipxe.efi" \
+  --pxe-service="tag:#ipxe,BC_EFI,'load ipxeboot (bc_efi)',ipxe.efi" \
   --pxe-service="tag:ipxe,BC_EFI,'load menu',${CHAIN}" \
-  --pxe-service="tag:#ipxe,x86-64_EFI,'chainload efi --> ipxe',ipxe.efi" \
+  --pxe-service="tag:#ipxe,x86-64_EFI,'load ipxeboot (efi)',ipxe.efi" \
   --pxe-service="tag:ipxe,x86-64_EFI,'load menu',${CHAIN}"

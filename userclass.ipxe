@@ -3,5 +3,5 @@
 # http://ipxe.org/appnote/userclass
 # Change the user-class to force loading of this particular iPXE binary.
 
-set user-class ipxechain
+set user-class ipxeboot
 autoboot
