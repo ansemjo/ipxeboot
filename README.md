@@ -10,7 +10,7 @@ Start the container, specifying your subnet and the chainload target as environm
     docker run --net host -d --restart=always \
       -e SUBNET=192.168.1.1 \
       -e CHAIN=http://boot.local/menu.ipxe \
-      ansemjo/ipxechain
+      ansemjo/ipxeboot
 
 Check the [iPXE documentation](http://ipxe.org/scripting) on pointers on how to write scripts and
 menus.
