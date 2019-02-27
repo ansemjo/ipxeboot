@@ -41,6 +41,7 @@ COPY --from=ipxe \
 # prepare default run command
 ENV SUBNET=192.168.1.1
 ENV CHAIN=unconfigured
+ENV DNSMASQ_OPTS=
 
 CMD exec dnsmasq -d -q --port 0 \
   --enable-tftp --tftp-root=/tftp \
@@ -51,4 +52,5 @@ CMD exec dnsmasq -d -q --port 0 \
   --pxe-service="tag:#ipxe,BC_EFI,'load ipxeboot (bc_efi)',ipxe.efi" \
   --pxe-service="tag:ipxe,BC_EFI,'load menu',${CHAIN}" \
   --pxe-service="tag:#ipxe,x86-64_EFI,'load ipxeboot (efi)',ipxe.efi" \
-  --pxe-service="tag:ipxe,x86-64_EFI,'load menu',${CHAIN}"
+  --pxe-service="tag:ipxe,x86-64_EFI,'load menu',${CHAIN}" \
+  ${DNSMASQ_OPTS}
